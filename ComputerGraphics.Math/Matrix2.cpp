@@ -15,7 +15,7 @@ Matrix2::~Matrix2()
 	delete[] m_data;
 }
 
-int Matrix2::CalculateValueIndex(int row, int column)
+int Matrix2::CalculateValueIndex(int row, int column) const
 {
 	return (row - 1) * m_columnCount + column - 1;
 }
@@ -25,12 +25,12 @@ void Matrix2::SetValue(float value, int row, int column)
 	m_data[CalculateValueIndex(row, column)] = value;
 }
 
-float& Matrix2::GetValue(int row, int column)
+float& Matrix2::GetValue(int row, int column) const
 {
 	return m_data[CalculateValueIndex(row, column)];
 }
 
-Matrix2 Matrix2::operator * (float value)
+Matrix2 Matrix2::operator * (float value) const
 {
 	auto resultMatrix = Matrix2(m_rowCount, m_columnCount);
 
@@ -45,7 +45,7 @@ Matrix2 Matrix2::operator * (float value)
 	return resultMatrix;
 }
 
-Matrix2 Matrix2::operator + (Matrix2 &other)
+Matrix2 Matrix2::operator + (Matrix2 &other) const
 {
 	if (m_rowCount != other.m_rowCount || m_columnCount != other.m_columnCount)
 		throw std::invalid_argument("The number of rows and columns of the terms of the matrices must match.");
@@ -63,7 +63,7 @@ Matrix2 Matrix2::operator + (Matrix2 &other)
 	return resultMatrix;
 }
 
-Matrix2 Matrix2::operator - (Matrix2 &other)
+Matrix2 Matrix2::operator - (Matrix2 &other) const
 {
 	if (m_rowCount != other.m_rowCount || m_columnCount != other.m_columnCount)
 		throw std::invalid_argument("The number of rows and columns of the terms of the matrices must match.");
