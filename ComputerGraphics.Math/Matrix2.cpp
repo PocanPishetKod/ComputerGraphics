@@ -34,7 +34,7 @@ Matrix2 Matrix2::operator * (float value) const
 {
 	auto resultMatrix = Matrix2(m_rowCount, m_columnCount);
 
-	for (int row = 1; row < resultMatrix.m_rowCount; row++)
+	for (int row = 1; row <= resultMatrix.m_rowCount; row++)
 	{
 		for (int column = 1; column < resultMatrix.m_columnCount; column++)
 		{
@@ -52,7 +52,7 @@ Matrix2 Matrix2::operator + (Matrix2 &other) const
 
 	auto resultMatrix = Matrix2(m_rowCount, m_columnCount);
 
-	for (int row = 1; row < resultMatrix.m_rowCount; row++)
+	for (int row = 1; row <= resultMatrix.m_rowCount; row++)
 	{
 		for (int column = 1; column < resultMatrix.m_columnCount; column++)
 		{
@@ -70,11 +70,26 @@ Matrix2 Matrix2::operator - (Matrix2 &other) const
 
 	auto resultMatrix = Matrix2(m_rowCount, m_columnCount);
 
-	for (int row = 1; row < resultMatrix.m_rowCount; row++)
+	for (int row = 1; row <= resultMatrix.m_rowCount; row++)
 	{
 		for (int column = 1; column < resultMatrix.m_columnCount; column++)
 		{
 			resultMatrix.SetValue(GetValue(row, column) - other.GetValue(row, column), row, column);
+		}
+	}
+
+	return resultMatrix;
+}
+
+Matrix2 Matrix2::Transpose() const
+{
+	auto resultMatrix = Matrix2(m_columnCount, m_rowCount);
+	
+	for (int selfColumn = 1, resultRow = 1; selfColumn <= m_columnCount; selfColumn++, resultRow++)
+	{
+		for (int selfRow = 1, resultColumn = 1; selfRow <= m_rowCount; selfRow++, resultColumn++)
+		{
+			resultMatrix.SetValue(GetValue(selfRow, selfColumn), resultRow, resultColumn);
 		}
 	}
 
